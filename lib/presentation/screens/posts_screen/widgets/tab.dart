@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TabWidget extends StatelessWidget {
   final String title;
   const TabWidget({Key? key,required this.title}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Tab(
@@ -15,7 +14,7 @@ class TabWidget extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             title,
-            style: TextStyle(fontSize: 12.sp),
+            style: TextStyle(fontSize: 14.sp),
           ),
         ),
       ),

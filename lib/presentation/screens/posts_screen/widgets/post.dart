@@ -35,7 +35,10 @@ class Post extends StatelessWidget {
                   color: Colors.black,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600
-                ),),
+                ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 SizedBox(
                   height: 20.h,
                 ),

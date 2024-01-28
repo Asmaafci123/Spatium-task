@@ -24,7 +24,7 @@ class _PostsScreenState extends State<PostsScreen>  with TickerProviderStateMixi
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async{
-      await GetPostsCubit.get(context).getPosts(PostCat.hot);
+      await GetPostsCubit.get(context).getPosts(PostCat.hot,"");
     });
   }
   @override
@@ -80,13 +80,13 @@ class _PostsScreenState extends State<PostsScreen>  with TickerProviderStateMixi
                             labelPadding: EdgeInsets.symmetric(vertical: 0.h),
                             onTap: (index) async{
                               if (index == 0) {
-                                await cubit.getPosts(PostCat.hot);
+                                await cubit.getPosts(PostCat.hot,nextAfter);
                               }
                               if (index == 1) {
-                                await cubit.getPosts(PostCat.New);
+                                await cubit.getPosts(PostCat.New,nextAfter);
                               }
                               if (index == 2) {
-                                await cubit.getPosts(PostCat.rising);
+                                await cubit.getPosts(PostCat.rising,nextAfter);
                               }
                             },
                             tabs:const [
@@ -107,9 +107,9 @@ class _PostsScreenState extends State<PostsScreen>  with TickerProviderStateMixi
                         physics: NeverScrollableScrollPhysics(),
                         controller: _tabController,
                         children: [
-                          ListWidget(posts: cubit.hotPosts,),
-                          ListWidget(posts: cubit.newPosts,),
-                          ListWidget(posts: cubit.risingPosts,),
+                          ListWidget(posts: cubit.hotPosts,cat:PostCat.hot ,),
+                          ListWidget(posts: cubit.newPosts,cat:PostCat.New),
+                          ListWidget(posts: cubit.risingPosts,cat:PostCat.rising ),
                         ],),
                     ),
                   ),

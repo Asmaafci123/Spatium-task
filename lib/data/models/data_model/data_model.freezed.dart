@@ -21,6 +21,8 @@ DataModel _$DataModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DataModel {
   @HiveField(0)
+  String? get after => throw _privateConstructorUsedError;
+  @HiveField(1)
   List<ChildrenModel>? get children => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +36,9 @@ abstract class $DataModelCopyWith<$Res> {
   factory $DataModelCopyWith(DataModel value, $Res Function(DataModel) then) =
       _$DataModelCopyWithImpl<$Res, DataModel>;
   @useResult
-  $Res call({@HiveField(0) List<ChildrenModel>? children});
+  $Res call(
+      {@HiveField(0) String? after,
+      @HiveField(1) List<ChildrenModel>? children});
 }
 
 /// @nodoc
@@ -50,9 +54,14 @@ class _$DataModelCopyWithImpl<$Res, $Val extends DataModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? after = freezed,
     Object? children = freezed,
   }) {
     return _then(_value.copyWith(
+      after: freezed == after
+          ? _value.after
+          : after // ignore: cast_nullable_to_non_nullable
+              as String?,
       children: freezed == children
           ? _value.children
           : children // ignore: cast_nullable_to_non_nullable
@@ -69,7 +78,9 @@ abstract class _$$DataModelImplCopyWith<$Res>
       __$$DataModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@HiveField(0) List<ChildrenModel>? children});
+  $Res call(
+      {@HiveField(0) String? after,
+      @HiveField(1) List<ChildrenModel>? children});
 }
 
 /// @nodoc
@@ -83,9 +94,14 @@ class __$$DataModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? after = freezed,
     Object? children = freezed,
   }) {
     return _then(_$DataModelImpl(
+      after: freezed == after
+          ? _value.after
+          : after // ignore: cast_nullable_to_non_nullable
+              as String?,
       children: freezed == children
           ? _value.children
           : children // ignore: cast_nullable_to_non_nullable
@@ -97,18 +113,21 @@ class __$$DataModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$DataModelImpl implements _DataModel {
-  _$DataModelImpl({@HiveField(0) this.children});
+  _$DataModelImpl({@HiveField(0) this.after, @HiveField(1) this.children});
 
   factory _$DataModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataModelImplFromJson(json);
 
   @override
   @HiveField(0)
+  final String? after;
+  @override
+  @HiveField(1)
   final List<ChildrenModel>? children;
 
   @override
   String toString() {
-    return 'DataModel(children: $children)';
+    return 'DataModel(after: $after, children: $children)';
   }
 
   @JsonKey(ignore: true)
@@ -126,14 +145,18 @@ class _$DataModelImpl implements _DataModel {
 }
 
 abstract class _DataModel implements DataModel {
-  factory _DataModel({@HiveField(0) final List<ChildrenModel>? children}) =
-      _$DataModelImpl;
+  factory _DataModel(
+      {@HiveField(0) final String? after,
+      @HiveField(1) final List<ChildrenModel>? children}) = _$DataModelImpl;
 
   factory _DataModel.fromJson(Map<String, dynamic> json) =
       _$DataModelImpl.fromJson;
 
   @override
   @HiveField(0)
+  String? get after;
+  @override
+  @HiveField(1)
   List<ChildrenModel>? get children;
   @override
   @JsonKey(ignore: true)

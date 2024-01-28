@@ -7,7 +7,7 @@ import '../models/responses/get_posts_response.dart';
 
 abstract class FlutterDevRepository {
   Future<Either<Failure,GetPostsModelResponse>> getPosts(
-      { required PostCat category});
+      { required PostCat category,  String? after});
 }
 
 class FlutterDevRepositoryImpl extends FlutterDevRepository {
@@ -21,13 +21,14 @@ class FlutterDevRepositoryImpl extends FlutterDevRepository {
 
   @override
   Future<Either<Failure,GetPostsModelResponse>>getPosts(
-      {required PostCat category})
+      {required PostCat category,  String? after})
   async {
     // if (await deviceConnectivity.isConnected == false) {
     //   return Left(DeviceConnectivityFailure(message: AppStrings.checkYourNetwork.tr()));
     // }
     try {
-      GetPostsModelResponse result = await remoteDataSource.getPosts(category: category);
+      GetPostsModelResponse result = await remoteDataSource.getPosts(category: category,after: after);
+      nextAfter=result.data?.after??"";
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));

@@ -15,13 +15,13 @@ class GetPostsCubit extends Cubit<GetPostsStates> {
   List<ChildrenModel>?newPosts=[];
   List<ChildrenModel>?hotPosts=[];
   List<ChildrenModel>?risingPosts=[];
-  getPosts(PostCat category)async
+  getPosts(PostCat category,  String? after)async
   {
     newPosts=[];
     hotPosts=[];
     risingPosts=[];
     emit(LoadingGetPostsState());
-    final result=await flutterDevRepository.getPosts(category: category);
+    final result=await flutterDevRepository.getPosts(category: category,after: after);
     result.fold((failure){
       emit(FailGetPostsState(message:failure.message));
     }, (response) {

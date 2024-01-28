@@ -9,7 +9,8 @@ part 'data_model.g.dart';
 class DataModel with _$DataModel{
   factory DataModel(
       {
-        @HiveField(0) final List<ChildrenModel>?children,
+        @HiveField(0) final String? after,
+        @HiveField(1) final List<ChildrenModel>?children,
       }) =_DataModel ;
   factory DataModel.fromJson(Map<String, dynamic> json) =>
       _$DataModelFromJson(json);
