@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spatium_task/core/constants/app_constants.dart';
 
 import '../../data/models/children_model/children_model.dart';
 import '../../data/models/data_post_model/data_post_model.dart';
@@ -14,7 +15,7 @@ class GetPostsCubit extends Cubit<GetPostsStates> {
   List<ChildrenModel>?newPosts=[];
   List<ChildrenModel>?hotPosts=[];
   List<ChildrenModel>?risingPosts=[];
-  getPosts(String category)async
+  getPosts(PostCat category)async
   {
     newPosts=[];
     hotPosts=[];
@@ -24,18 +25,15 @@ class GetPostsCubit extends Cubit<GetPostsStates> {
     result.fold((failure){
       emit(FailGetPostsState(message:failure.message));
     }, (response) {
-      print("******************");
-      if(category=="new") {
+      if(category==PostCat.New) {
         newPosts=response.data?.children;
       }
-      if(category=="hot") {
+      if(category==PostCat.hot) {
         hotPosts=response.data?.children;
       }
-      if(category=="rising") {
+      if(category==PostCat.rising) {
         risingPosts=response.data?.children;
       }
-      print(newPosts);
-      print("******************");
       emit(SuccessGetPostsState());
     });
   }

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import '../../core/constants/app_constants.dart';
 import '../../core/errors/exceptions.dart';
 import '../../core/errors/failures.dart';
 import '../datasources/remote_data_source.dart';
@@ -6,7 +7,7 @@ import '../models/responses/get_posts_response.dart';
 
 abstract class FlutterDevRepository {
   Future<Either<Failure,GetPostsModelResponse>> getPosts(
-      { required String category});
+      { required PostCat category});
 }
 
 class FlutterDevRepositoryImpl extends FlutterDevRepository {
@@ -20,7 +21,7 @@ class FlutterDevRepositoryImpl extends FlutterDevRepository {
 
   @override
   Future<Either<Failure,GetPostsModelResponse>>getPosts(
-      { required String category})
+      {required PostCat category})
   async {
     // if (await deviceConnectivity.isConnected == false) {
     //   return Left(DeviceConnectivityFailure(message: AppStrings.checkYourNetwork.tr()));

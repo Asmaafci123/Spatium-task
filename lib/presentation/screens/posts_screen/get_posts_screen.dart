@@ -6,6 +6,7 @@ import 'package:spatium_task/presentation/screens/posts_screen/widgets/list.dart
 import 'package:spatium_task/presentation/screens/posts_screen/widgets/post.dart';
 import 'package:spatium_task/presentation/screens/posts_screen/widgets/tab.dart';
 
+import '../../../core/constants/app_constants.dart';
 import '../../../logic/get_posts/get_posts_states.dart';
 import '../../widgets/utils/loading_dialog.dart';
 
@@ -23,7 +24,7 @@ class _PostsScreenState extends State<PostsScreen>  with TickerProviderStateMixi
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async{
-      await GetPostsCubit.get(context).getPosts("hot");
+      await GetPostsCubit.get(context).getPosts(PostCat.hot);
     });
   }
   @override
@@ -79,13 +80,13 @@ class _PostsScreenState extends State<PostsScreen>  with TickerProviderStateMixi
                             labelPadding: EdgeInsets.symmetric(vertical: 0.h),
                             onTap: (index) async{
                               if (index == 0) {
-                                await cubit.getPosts("hot");
+                                await cubit.getPosts(PostCat.hot);
                               }
                               if (index == 1) {
-                                await cubit.getPosts("new");
+                                await cubit.getPosts(PostCat.New);
                               }
                               if (index == 2) {
-                                await cubit.getPosts("rising");
+                                await cubit.getPosts(PostCat.rising);
                               }
                             },
                             tabs:const [

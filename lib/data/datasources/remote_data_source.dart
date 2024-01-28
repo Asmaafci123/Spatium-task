@@ -1,13 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../core/utils/services/dio_client.dart';
+import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_end_points.dart';
 import '../models/responses/get_posts_response.dart';
 
 
 abstract class RemoteDataSource {
   Future<GetPostsModelResponse> getPosts(
-      {required String category});
+      {required PostCat category});
 }
 
 class  RemoteDataSourceImpl  extends RemoteDataSource {
@@ -18,9 +20,25 @@ class  RemoteDataSourceImpl  extends RemoteDataSource {
   final String subreddit = 'FlutterDev';
   @override
   Future<GetPostsModelResponse> getPosts({
-    required String category
+    required PostCat category
   }) async {
-    String url='${AppEndpoints.baseUrl}/$category.json';
+    print("!!!!!!!!!!!!!!!!@@@@@@@@@@@@@@@###########");
+    print(category);
+    print("!!!!!!!!!!!!!!!!@@@@@@@@@@@@@@@###########");
+    String cat="";
+    switch (category) {
+      case PostCat.New:
+        cat="new";
+        break;
+      case PostCat.hot:
+        cat="hot";
+        break;
+      case PostCat.rising:
+        cat="rising";
+        break;
+    }
+    print(cat);
+    String url='${AppEndpoints.baseUrl}/$cat.json';
     final response = await client.request(
         url: url,
         method: HttpMethod.GET,
@@ -30,9 +48,6 @@ class  RemoteDataSourceImpl  extends RemoteDataSource {
         },
       )
         );
-    print("111111111111111111111111111");
-    print(response.data);
-    print("111111111111111111111111111");
     return GetPostsModelResponse.fromJson(response.data);
   }
 
