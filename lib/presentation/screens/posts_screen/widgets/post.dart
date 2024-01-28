@@ -13,7 +13,6 @@ class Post extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    print(post?.selftext);
     return GestureDetector(
       onTap: ()
       {

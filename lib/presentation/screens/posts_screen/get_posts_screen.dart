@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spatium_task/logic/get_posts/get_posts_cubit.dart';
 import 'package:spatium_task/presentation/screens/posts_screen/widgets/list.dart';
-import 'package:spatium_task/presentation/screens/posts_screen/widgets/post.dart';
 import 'package:spatium_task/presentation/screens/posts_screen/widgets/tab.dart';
-
 import '../../../core/constants/app_constants.dart';
 import '../../../logic/get_posts/get_posts_states.dart';
 import '../../widgets/utils/loading_dialog.dart';
@@ -24,7 +22,7 @@ class _PostsScreenState extends State<PostsScreen>  with TickerProviderStateMixi
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async{
-      await GetPostsCubit.get(context).getPosts(PostCat.hot,"");
+      await GetPostsCubit.get(context).getPosts(PostCatTitle.Hot,"");
     });
   }
   @override
@@ -73,26 +71,23 @@ class _PostsScreenState extends State<PostsScreen>  with TickerProviderStateMixi
                             unselectedLabelColor: Color(0xFF6D6D6D),
                             indicatorSize: TabBarIndicatorSize.label,
                             indicatorPadding: EdgeInsets.symmetric(vertical: 20.h),
-                            // indicator: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(8.r),
-                            //     color: redColor),
                             padding: EdgeInsets.zero,
                             labelPadding: EdgeInsets.symmetric(vertical: 0.h),
                             onTap: (index) async{
                               if (index == 0) {
-                                await cubit.getPosts(PostCat.hot,nextAfter);
+                                await cubit.getPosts(PostCatTitle.Hot,nextAfter);
                               }
                               if (index == 1) {
-                                await cubit.getPosts(PostCat.New,nextAfter);
+                                await cubit.getPosts(PostCatTitle.New,nextAfter);
                               }
                               if (index == 2) {
-                                await cubit.getPosts(PostCat.rising,nextAfter);
+                                await cubit.getPosts(PostCatTitle.Rising,nextAfter);
                               }
                             },
-                            tabs:const [
-                               TabWidget(title: "Hot",),
-                              TabWidget(title: "New",),
-                              TabWidget(title: "Rising",),
+                            tabs: [
+                               TabWidget(title: PostCatTitle.Hot.name.toString(),),
+                              TabWidget(title: PostCatTitle.New.name.toString(),),
+                              TabWidget(title: PostCatTitle.Rising.name.toString(),),
                             ]),
                       ),
                     ],
@@ -107,9 +102,9 @@ class _PostsScreenState extends State<PostsScreen>  with TickerProviderStateMixi
                         physics: NeverScrollableScrollPhysics(),
                         controller: _tabController,
                         children: [
-                          ListWidget(posts: cubit.hotPosts,cat:PostCat.hot ,),
-                          ListWidget(posts: cubit.newPosts,cat:PostCat.New),
-                          ListWidget(posts: cubit.risingPosts,cat:PostCat.rising ),
+                          ListWidget(posts: cubit.hotPosts,cat:PostCatTitle.Hot ,),
+                          ListWidget(posts: cubit.newPosts,cat:PostCatTitle.New),
+                          ListWidget(posts: cubit.risingPosts,cat:PostCatTitle.Rising ),
                         ],),
                     ),
                   ),

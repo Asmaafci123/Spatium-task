@@ -7,7 +7,7 @@ import '../../../../data/models/children_model/children_model.dart';
 class ListWidget extends StatefulWidget {
 
   final   List<ChildrenModel>?posts;
-  final PostCat cat;
+  final PostCatTitle cat;
   const ListWidget({Key? key,required this.posts,required this.cat}) : super(key: key);
 
   @override

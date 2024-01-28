@@ -1,2 +1,2 @@
-enum PostCat { hot, New, rising }
+enum PostCatTitle{ Hot, New, Rising }
 String nextAfter="";

@@ -9,7 +9,7 @@ import '../models/responses/get_posts_response.dart';
 
 abstract class RemoteDataSource {
   Future<GetPostsModelResponse> getPosts(
-      {required PostCat category, String? after});
+      {required PostCatTitle category, String? after});
 }
 
 class  RemoteDataSourceImpl  extends RemoteDataSource {
@@ -20,21 +20,10 @@ class  RemoteDataSourceImpl  extends RemoteDataSource {
   final String subreddit = 'FlutterDev';
   @override
   Future<GetPostsModelResponse> getPosts({
-    required PostCat category,
+    required PostCatTitle category,
     String? after
   }) async {
-    String cat="";
-    switch (category) {
-      case PostCat.New:
-        cat="new";
-        break;
-      case PostCat.hot:
-        cat="hot";
-        break;
-      case PostCat.rising:
-        cat="rising";
-        break;
-    }
+    String cat=category.name.toLowerCase().toString();
     String url='${AppEndpoints.baseUrl}/$cat.json';
     final response = await client.request(
         url: url,
